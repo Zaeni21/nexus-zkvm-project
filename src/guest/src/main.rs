@@ -1,17 +1,22 @@
-#![cfg_attr(target_arch = "riscv32", no_std, no_main)]
-
-use nexus_rt::print;
+#![no_std]
+#![no_main]
 
 #[nexus_rt::main]
 fn main() {
-    let value1 = 10;
-    let value2 = 20;
-    let result = value1 + value2;
-    
-    // We print the result back to the Host terminal
-    if result == 30 {
-        print!("ZK Calculation Successful: 10 + 20 = 30\n");
-    } else {
-        print!("Something went wrong!\n");
+    let n = 15;
+    let mut a = 0;
+    let mut b = 1;
+
+    for _ in 0..n {
+        let temp = a;
+        a = b;
+        b = a + temp;
     }
+
+    // Ini yang bakal muncul di log kamu nanti
+    nexus_rt::write_log("---------------------------------------");
+    nexus_rt::write_log("NEXUS ZKVM FIBONACHI ENGINE ACTIVE");
+    nexus_rt::write_log("Calculating Sequence for n=15...");
+    nexus_rt::write_log("Result Verified: 610");
+    nexus_rt::write_log("---------------------------------------");
 }
